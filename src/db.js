@@ -1,21 +1,24 @@
 /**
  * Created by schoeu on 2017/4/3.
  */
-
-var dbConf = require('../src/config')('../config/config_db.json');
+var path = require('path');
+var Sequelize = require('sequelize');
+var crtPath = path.join(__dirname, '..');
+var dbConf = require(crtPath + '/src/config').path(crtPath + '/config/config_db.json');
 
 module.exports = {
     getDb: function () {
-        var sequelize = new Sequelize(dbConf.getItem('name'), dbConf.getItem('username'), dbConf.getItem('password'), {
-            host: dbConf.getItem('address'),
-            dialect: 'mysql',
-
-            pool: {
-                max: 5,
-                min: 0,
-                idle: 10000
+        var sequelize = new Sequelize(
+            dbConf.getItem('name'),
+            dbConf.getItem('username'),
+            dbConf.getItem('password'),
+            {
+                'dialect': 'mysql',
+                'host': dbConf.getItem('address'),
+                'port': dbConf.getItem('port')
             }
-        });
+        );
+
         return sequelize;
     }
 };
