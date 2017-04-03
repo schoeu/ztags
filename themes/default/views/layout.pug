@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='icon', href='/static/favicon.ico')
+    link(type='text/css', rel='stylesheet', href='/css/normalize.css')
+    block cstyle
+  body
+    header.bt-header
+      .bt-content.bt-clear.bt-container
+        .bt-hdleft.bt-color-white
+          span.bt-logo
+          span.bt-logoinfo
+            | schoeu
+        .bt-hdright.bt-color-white.bt-text-right
+          span.bt-login
+            a.bt-a(href='/login') 登陆
+          span.bt-signin
+            a.bt-a(href='/signup') 注册
+    block content
+    .bt-footer-container
+      .bt-footer-area
+        .bt-footer-text
+          | xxx交流群：xxxx
+        .bt-footer-text
+          | Copyright © schoeu.com 4.0 2016 All Rights Reserved. 京ICP备xxxx号
+    script(src='/js/jq.min.js')
+    block cscript

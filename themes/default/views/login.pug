@@ -1,0 +1,45 @@
+html
+    head
+        block base_headinfo
+        link(type='text/css', rel='stylesheet', href='/static/css/login.css')
+    body
+        .bt-login-container
+            .bt-login-bg
+            .bt-login-logo
+                .bt-login-lg
+                .bt-login-title SCHOEU
+            .bt-login-area
+                .bt-login-lf
+                .bt-login-rt
+                    .bt-login-ctt
+                        .bt-login-btns
+                            .bt-login-signup
+                                | 注册
+                            .bt-login-login.bt-login-active
+                                | 登录
+                        .bt-login-wc
+                            | WELCOME
+                            br
+                            |                     TO
+                            br
+                            |                     SCHOEU
+                        .bt-login-lgform.bt-font-16
+                            form(action='/login', method='post')
+                                label(for='username') 账号
+                                .bt-login-un
+                                    input#username.bt-font-14(type='text', name='username', placeholder='请输入用户名')
+                                label(for='password') 密码
+                                .bt-login-psw
+                                    input#password.bt-font-14(type='password', name='password', placeholder='请输入密码')
+                                .bt-login-forget.bt-font-14.bt-text-right
+                                    a(href='/forgetpassword') 忘记密码
+                                .bt-login-libtn.bt-font-14.bt-text-center
+                                    input.bt-btn.bt-login-submit(type='submit', value='登录')
+                            .bt-login-others
+                                | 第三方登录
+                            .bt-login-app
+                                span.bt-login-appitem
+                                span.bt-login-appitem
+                                span.bt-login-appitem
+        script(src='/static/js/jq.min.js')
+        script(src='/static/js/login.js')

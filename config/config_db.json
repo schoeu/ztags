@@ -1,0 +1,12 @@
+{
+  "db_address": "@tcp(101.200.160.17:3306)",
+  "db_name": "biztab",
+  "db_username": "root",
+  "db_password": "caoyifeng2b",
+  "qiniu_ak": "uz13psbg6W0n2jfie5ts4xLlcfwWojxGS2HfcBNG",
+  "qiniu_sk": "ikoCEy20LZ1m35tkOTEigLyoAYqTvoujS_YTCKi2",
+  "qiniu_bucket": "schoeu",
+
+  "biz_theme": "default",
+  "biz_port": ":8910"
+}
