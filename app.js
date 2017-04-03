@@ -8,10 +8,11 @@ var bodyParser = require('body-parser');
 var appConf = require('./src/config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var tags = require('./routes/tags');
 
 var app = express();
 
-var theme = appConf.path('../config/config_app.json').getItem('theme');
+var theme = appConf.path('./config/config_app.json')('theme');
 var staticDir = path.join(__dirname, 'themes', theme);
 
 // view engine setup
