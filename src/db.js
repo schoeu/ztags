@@ -13,12 +13,26 @@ module.exports = {
             dbConf.getItem('username'),
             dbConf.getItem('password'),
             {
-                'dialect': 'mysql',
-                'host': dbConf.getItem('address'),
-                'port': dbConf.getItem('port')
+                dialect: 'mysql',
+                host: dbConf.getItem('address'),
+                port: dbConf.getItem('port')
             }
         );
 
-        return sequelize;
+        var user = sequelize.define('user', {
+            email: {
+                type: Sequelize.STRING
+            },
+            lastLogin: {
+                type: Sequelize.STRING
+            },
+            password: {
+                type: Sequelize.STRING
+            },
+            username: {
+                type: Sequelize.STRING
+            }
+        });
+        return user;
     }
 };

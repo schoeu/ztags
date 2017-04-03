@@ -19,6 +19,8 @@ router.post('/login', function(req, res, next) {
         }).then(function (user) {
             console.log('user', user);
             res.render('login', {title: 'Ztags'});
+        }).catch(function (e) {
+            console.log(e);
         });
     }
 });
