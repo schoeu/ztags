@@ -35,7 +35,7 @@
     padding: 30px;
 }
 .bt-login-lf{
-    background-image: url("/static/imgs/left.png");
+    background-image: url("/imgs/left.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -53,7 +53,7 @@
 .bt-login-lg{
     height: 60px;
     width: 50px;
-    background-image: url(/static/imgs/loginlogo.png);
+    background-image: url(/imgs/loginlogo.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

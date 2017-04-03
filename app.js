@@ -11,7 +11,7 @@ var tags = require('./routes/tags');
 
 var app = express();
 
-var theme = appConf.path('./config/config_app.json')('theme');
+var theme = appConf.path(path.join(__dirname, './config/config_app.json')).getItem('theme');
 var staticDir = path.join(__dirname, 'themes', theme);
 
 // view engine setup
