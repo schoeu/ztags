@@ -11,7 +11,7 @@ $pswoginForm.on('submit', function (e) {
     $pswBtn.attr('disabled', true);
     var data = $pswoginForm.serialize();
     $.ajax({
-        url: '/users/password',
+        url: '/users/infos',
         type: 'post',
         data: data
     }).done(function (d) {

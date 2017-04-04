@@ -11,11 +11,34 @@ var defaultInfos = {
 };
 
 /* GET users listing. */
-router.get('/password', function (req, res, next) {
-    res.render('password');
+router.get('/infos', function (req, res, next) {
+    var username = req.session.username;
+    if (username) {
+        userConn.findOne({
+            attributes: ['nickname', 'sex', 'email', 'description', 'sign', 'sex'],
+            where: {
+                username: username
+            }
+        }).then(function (user) {
+            var nickname = user.get('nickname');
+            var sex = user.get('sex');
+            var email = user.get('email');
+            var description = user.get('description');
+            var sign = user.get('sign');
+            res.render('infos', {
+                nickname: nickname,
+                sex: sex,
+                email: email,
+                description: description,
+                sign: sign
+            });
+        }).catch(function (e) {
+            console.log(e);
+        });
+    }
 });
 
-router.post('/password', function (req, res, next) {
+router.post('/infos', function (req, res, next) {
     var username = req.session.username;
     var nickname = req.body.nickname;
     var sex = req.body.sex;
@@ -95,6 +118,7 @@ router.post('/signup', function (req, res, next) {
                 status: 1
             });
         });
+
     }
 });
 
