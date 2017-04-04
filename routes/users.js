@@ -17,8 +17,17 @@ router.post('/login', function(req, res, next) {
                 username: userName
             }
         }).then(function (user) {
-            console.log('user', user);
-            res.render('login', {title: 'Ztags'});
+            var psw = user.get('password');
+            if (psw === password) {
+                req.session.username = userName;
+                res.redirect('/', {title: 'Ztags'});
+            }
+            else {
+                res.json({
+                    errno: 0,
+                    status: 1
+                });
+            }
         }).catch(function (e) {
             console.log(e);
         });

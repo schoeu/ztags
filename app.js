@@ -1,17 +1,18 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var appConf = require('./src/config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var tags = require('./routes/tags');
 
+var config = appConf.path(path.join(__dirname, './config/config_app.json'));
 var app = express();
 
-var theme = appConf.path(path.join(__dirname, './config/config_app.json')).getItem('theme');
+var theme = config.getItem('theme');
 var staticDir = path.join(__dirname, 'themes', theme);
 
 // view engine setup
@@ -21,9 +22,13 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(staticDir, 'static')));
+app.use(session({
+    secret: config.getItem('secret'),
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use('/', routes);
 app.use('/users', users);

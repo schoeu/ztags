@@ -7,8 +7,13 @@ block content
                 span.bt-logoinfo
                     | schoeu
             .bt-hdright.bt-color-white.bt-text-right
-                span.bt-login
-                    a.bt-a(href='/users/login') 登陆
+                if username
+                    span.bt-login
+                        a.bt-a(href='/users/login') #{username}
+                else
+                    span.bt-login
+                        a.bt-a(href='/users/login') 登录
+
                 span.bt-signin
                     a.bt-a(href='/users/signup') 注册
     block gird_content
