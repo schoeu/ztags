@@ -38,8 +38,7 @@ router.post('/signup', function (req, res, next) {
             }
         }).then(function (user) {
             if (user && user.$options.raw) {
-                res.json({
-                    errno: 0,
+                res.returnJson({
                     status: 1
                 });
             }
@@ -52,14 +51,12 @@ router.post('/signup', function (req, res, next) {
             }
         }).then(function (u) {
             if (u) {
-                res.json({
-                    errno: 0,
+                res.returnJson({
                     status: 0
                 });
             }
         }).catch(function (e) {
-            res.json({
-                errno: 0,
+            res.returnJson({
                 status: 1
             });
         });
@@ -85,14 +82,12 @@ router.post('/login', function (req, res, next) {
                         username: userName
                     }
                 });
-                res.json({
-                    errno: 0,
+                res.returnJson({
                     status: 0
                 });
             }
             else {
-                res.json({
-                    errno: 0,
+                res.returnJson({
                     status: 1
                 });
             }

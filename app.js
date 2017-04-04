@@ -31,6 +31,18 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(function (req, res, next) {
+    if (!res.returnJson) {
+        res.returnJson = function (val) {
+            res.json(Object.assign({}, {
+                errno: 0
+            }, val));
+        };
+    }
+    next();
+});
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/tags', tags);
