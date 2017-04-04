@@ -11,6 +11,41 @@ var defaultInfos = {
 };
 
 /* GET users listing. */
+router.get('/password', function (req, res, next) {
+    res.render('password');
+});
+
+router.post('/password', function (req, res, next) {
+    var username = req.session.username;
+    var nickname = req.body.nickname;
+    var sex = req.body.sex;
+    var email = req.body.email;
+    var description = req.body.description;
+    var sign = req.body.sign;
+    if (username) {
+        userConn.update({
+            nickname: nickname,
+            sex: sex,
+            email: email,
+            description: description,
+            sign: sign
+        }, {
+            where: {
+                username: username
+            }
+        }).then(function (result){
+            res.returnJson({
+                status: 0
+            });
+        }).catch(function(err){
+            res.returnJson({
+                status: 1
+            });
+        });
+    }
+});
+
+/* GET users listing. */
 router.get('/login', function (req, res, next) {
     res.render('login', defaultInfos);
 });

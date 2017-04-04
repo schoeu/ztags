@@ -34,6 +34,18 @@ module.exports = {
             },
             username: {
                 type: Sequelize.STRING
+            },
+            sex: {
+                type: Sequelize.STRING
+            },
+            description: {
+                type: Sequelize.STRING
+            },
+            sign: {
+                type: Sequelize.STRING
+            },
+            nickname: {
+                type: Sequelize.STRING
             }
         });
         return user;
