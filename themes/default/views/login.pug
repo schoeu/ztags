@@ -32,8 +32,9 @@ block content
                             label(for='password') 密码
                             .bt-login-psw
                                 input#password.bt-font-14(type='password', name='password', placeholder='请输入密码')
-                            .bt-login-forget.bt-font-14.bt-text-right
-                                a(href='/forgetpassword') 忘记密码
+                            .bt-login-forget.bt-font-14
+                                span.bt-text-left.loginText
+                                a.bt-text-right(href='/forgetpassword') 忘记密码
                             .bt-login-libtn.bt-font-14.bt-text-center
                                 input.bt-btn.bt-login-submit(type='submit', value='登录')
                         .bt-login-others

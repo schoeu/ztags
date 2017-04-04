@@ -20,7 +20,10 @@ router.post('/login', function(req, res, next) {
             var psw = user.get('password');
             if (psw === password) {
                 req.session.username = userName;
-                res.redirect('/', {title: 'Ztags'});
+                res.json({
+                    errno: 0,
+                    status: 0
+                });
             }
             else {
                 res.json({
