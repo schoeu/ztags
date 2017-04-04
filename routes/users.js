@@ -10,7 +10,51 @@ var defaultInfos = {
     title: config.getItem('title')
 };
 
-/* GET users listing. */
+/**
+ * 修改密码
+ * */
+router.get('/password', function (req, res, next) {
+    res.render('password');
+});
+
+router.post('/password', function (req, res, next) {
+    var username = req.session.username;
+    var opsw = req.body.opsw;
+    var password = req.body.password;
+    if (username) {
+        userConn.findOne({
+            attributes: ['password'],
+            where: {
+                username: username
+            }
+        }).then(function (result) {
+            var p = result.get('password');
+            if (p === opsw) {
+                return userConn.update({
+                    password: password
+                }, {
+                    where: {
+                        username: username
+                    }
+                });
+            }
+        }).then(function (r) {
+            if (r) {
+                res.returnJson({
+                    status: 0
+                });
+            }
+        }).catch(function (err) {
+            res.returnJson({
+                status: 1
+            });
+        });
+    }
+});
+
+/**
+ * 修改个人信息
+ * */
 router.get('/infos', function (req, res, next) {
     var username = req.session.username;
     if (username) {
@@ -68,18 +112,17 @@ router.post('/infos', function (req, res, next) {
     }
 });
 
-/* GET users listing. */
-router.get('/login', function (req, res, next) {
-    res.render('login', defaultInfos);
-});
-
-/* GET users listing. */
+/**
+ * 注销
+ * */
 router.get('/signout', function (req, res, next) {
     req.session.username = '';
     res.render('main', defaultInfos);
 });
 
-/* GET users listing. */
+/**
+ * 注册
+ * */
 router.get('/signup', function (req, res, next) {
     res.render('signup', defaultInfos);
 });
@@ -120,6 +163,13 @@ router.post('/signup', function (req, res, next) {
         });
 
     }
+});
+
+/**
+ * 登录
+ * */
+router.get('/login', function (req, res, next) {
+    res.render('login', defaultInfos);
 });
 
 router.post('/login', function (req, res, next) {
