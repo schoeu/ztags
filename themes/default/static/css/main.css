@@ -49,6 +49,9 @@
 .bt-hdright{
     float: right;
 }
+.bt-hdleft{
+    float: left;
+}
 .bt-logo{
     display: inline-block;
     width: 34px;
@@ -167,4 +170,17 @@
 }
 .bt-recom-opacity5{
     opacity: .5;
+}
+.bt-logined:hover .bt-pinfos {
+   display: block;
+}
+.bt-logined{
+    position: relative;
+}
+.bt-pinfos {
+    position: absolute;
+    right: 0;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
 }

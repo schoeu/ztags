@@ -14,7 +14,10 @@ var defaultInfos = {
  * 修改密码
  * */
 router.get('/password', function (req, res, next) {
-    res.render('password');
+    var username = req.session.username;
+    res.render('password', Object.assign({}, {
+        username: username
+    }, defaultInfos));
 });
 
 router.post('/password', function (req, res, next) {
@@ -69,13 +72,14 @@ router.get('/infos', function (req, res, next) {
             var email = user.get('email');
             var description = user.get('description');
             var sign = user.get('sign');
-            res.render('infos', {
+            res.render('infos', Object.assign({}, {
+                username: username,
                 nickname: nickname,
                 sex: sex,
                 email: email,
                 description: description,
                 sign: sign
-            });
+            }, defaultInfos));
         }).catch(function (e) {
             console.log(e);
         });

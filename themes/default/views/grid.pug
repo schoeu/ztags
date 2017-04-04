@@ -1,15 +1,21 @@
 extends layout
 block content
     header.bt-header
-        .bt-content.bt-clear.bt-container
+        .bt-clear.bt-clear.bt-container
             .bt-hdleft.bt-color-white
                 span.bt-logo
                 span.bt-logoinfo
                     | schoeu
             .bt-hdright.bt-color-white.bt-text-right
                 if username
-                    span.bt-login
+                    span.bt-logined.bt-login
                         a.bt-a(href='#') #{username}
+                        span.bt-pinfos.bt-hide
+                            span #{username}
+                            div
+                                a(href='/users/infos') 修改个人信息
+                            div
+                                a(href='/users/password') 修改密码
                     span.bt-signin
                         a.bt-a(href='/users/signout') 注销
                 else
