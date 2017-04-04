@@ -1,19 +1,31 @@
-$suForm = $("#addsForm");
-$smtBtn = $suForm.find('.signupSbm');
-$uname = $(".biz_username");
-$suForm.on("submit", function () {
-    $smtBtn.attr("disabled", true);
-    var data = $smtBtn.serialize();
+var $signupForm = $('.signupForm');
+var $signUpText = $('.signUpText');
+var $signUpBtn = $('.bt-signup-submit');
+$signupForm.on('submit', function (e) {
+    var $target = $(this);
+    e.preventDefault();
+    var password = $target.find('#password').val();
+    var repassword = $target.find('#repassword').val();
+    if (password !== repassword) {
+        $signUpText.text('两次密码不一致');
+        return;
+    }
+    $signUpBtn.attr('disabled', true);
+    var data = $signupForm.serialize();
     $.ajax({
-        url: "/signup",
-        type: "post",
+        url: '/users/signup',
+        type: 'post',
         data: data
     }).done(function (d) {
-        if (d.errorNo === 0) {
-            console.log(d)
-            $uname.text(d.username || "");
+        if (d.errno === 0) {
+            if (d.status === 1) {
+                $signUpText.text('该用户已注册');
+            }
+            else if (d.status === 0) {
+                location.href = '/';
+            }
         }
     }).complete(function () {
-        $smtBtn.attr("disabled", false);
+        $signUpBtn.attr('disabled', false);
     });
 });

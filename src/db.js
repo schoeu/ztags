@@ -20,6 +20,9 @@ module.exports = {
         );
 
         var user = sequelize.define('user', {
+            uuid: {
+                type: Sequelize.STRING
+            },
             email: {
                 type: Sequelize.STRING
             },
