@@ -9,13 +9,15 @@ block content
             .bt-hdright.bt-color-white.bt-text-right
                 if username
                     span.bt-login
-                        a.bt-a(href='/users/login') #{username}
+                        a.bt-a(href='#') #{username}
+                    span.bt-signin
+                        a.bt-a(href='/users/signout') 注销
                 else
                     span.bt-login
                         a.bt-a(href='/users/login') 登录
+                    span.bt-signin
+                        a.bt-a(href='/users/signup') 注册
 
-                span.bt-signin
-                    a.bt-a(href='/users/signup') 注册
     block gird_content
     .bt-footer-container
         .bt-footer-area

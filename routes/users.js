@@ -2,13 +2,24 @@ var express = require('express');
 var router = express.Router();
 var db = require('../src/db');
 var userConn = db.getDb();
+var config = require('../src/config').path('../config/config_app.json');
+
+var defaultInfos = {
+    title: config.getItem('title')
+};
 
 /* GET users listing. */
-router.get('/login', function(req, res, next) {
-    res.render('login', {title: 'Ztags'});
+router.get('/login', function (req, res, next) {
+    res.render('login', defaultInfos);
 });
 
-router.post('/login', function(req, res, next) {
+/* GET users listing. */
+router.get('/signout', function (req, res, next) {
+    req.session.username = '';
+    res.render('main', defaultInfos);
+});
+
+router.post('/login', function (req, res, next) {
     var userName = req.body.username;
     var password = req.body.password;
     if (userName && password) {

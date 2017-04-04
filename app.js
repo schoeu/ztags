@@ -27,6 +27,7 @@ app.use(express.static(path.join(staticDir, 'static')));
 app.use(session({
     secret: config.getItem('secret'),
     resave: false,
+    cookie: {maxAge: 3600 * 24 * 30},
     saveUninitialized: true
 }));
 
