@@ -2,6 +2,7 @@ var express = require('express');
 var uuid = require('uuid/v4');
 var router = express.Router();
 var db = require('../src/db');
+var crypto = require('crypto');
 var utils = require('../utils/utils');
 var userConn = db.getDb();
 var config = require('../src/config').path('../config/config_app.json');
@@ -24,7 +25,8 @@ router.post('/password', function (req, res, next) {
     var username = req.session.username;
     var opsw = req.body.opsw;
     var password = req.body.password;
-    if (opsw && username) {
+    var hashNewPsw = crypto.createHash('sha1').update(password).digest('hex');
+    if (opsw && username && password) {
         userConn.findOne({
             attributes: ['password'],
             where: {
@@ -32,9 +34,10 @@ router.post('/password', function (req, res, next) {
             }
         }).then(function (result) {
             var p = result.get('password');
-            if (p === opsw) {
+            var hashPsw = crypto.createHash('sha1').update(opsw).digest('hex');
+            if (p === hashPsw) {
                 return userConn.update({
-                    password: password
+                    password: hashNewPsw
                 }, {
                     where: {
                         username: username
@@ -42,11 +45,13 @@ router.post('/password', function (req, res, next) {
                 });
             }
         }).then(function (r) {
+            var returnStatus = 1;
             if (r) {
-                res.returnJson({
-                    status: 0
-                });
+                returnStatus = 0;
             }
+            res.returnJson({
+                status: returnStatus
+            });
         }).catch(function (err) {
             res.returnJson({
                 status: 1
@@ -139,6 +144,7 @@ router.get('/signup', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
+    var hashPsw = crypto.createHash('sha1').update(password).digest('hex');
     if (username && password) {
         req.session.username = username;
         userConn.findOne({
@@ -155,7 +161,7 @@ router.post('/signup', function (req, res, next) {
             else {
                 return userConn.create({
                     username: username,
-                    password: password,
+                    password: hashPsw,
                     uuid: uuid()
                 });
             }
@@ -191,7 +197,8 @@ router.post('/login', function (req, res, next) {
             }
         }).then(function (user) {
             var psw = user.get('password');
-            if (psw === password) {
+            var hashPsw = crypto.createHash('sha1').update(password).digest('hex');
+            if (psw === hashPsw) {
                 req.session.username = userName;
                 userConn.update({
                     lastLogin: utils.dateFormat(new Date(), 'yyyy-MM-dd HH:mm:ss')
