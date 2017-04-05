@@ -24,7 +24,7 @@ router.post('/password', function (req, res, next) {
     var username = req.session.username;
     var opsw = req.body.opsw;
     var password = req.body.password;
-    if (username) {
+    if (opsw && username) {
         userConn.findOne({
             attributes: ['password'],
             where: {
@@ -51,6 +51,11 @@ router.post('/password', function (req, res, next) {
             res.returnJson({
                 status: 1
             });
+        });
+    }
+    else {
+        res.returnJson({
+            status: 1
         });
     }
 });

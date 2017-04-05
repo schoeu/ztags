@@ -3,9 +3,15 @@ var $pswBtn = $pswoginForm.find('.bt-psw-submit');
 var $pswText = $('.pswText');
 $pswoginForm.on('submit', function (e) {
     e.preventDefault();
-    var nickName = $pswoginForm.find('#nickname');
-    if (!nickName) {
-        $pswText.text('昵称必填');
+    var opsw = $pswoginForm.find('#opsw').val();
+    var repassword = $pswoginForm.find('#repassword').val();
+    var password = $pswoginForm.find('#password').val();
+    if (!opsw) {
+        $pswText.text('请输入原密码.');
+        return;
+    }
+    if (repassword !== password) {
+        $pswText.text('两次密码不匹配.');
         return;
     }
     $pswBtn.attr('disabled', true);
