@@ -3,6 +3,7 @@
  */
 var path = require('path');
 var Sequelize = require('sequelize');
+var schema = require('./schema');
 var crtPath = path.join(__dirname, '..');
 var dbConf = require(crtPath + '/src/config').path(crtPath + '/config/config_db.json');
 
@@ -19,35 +20,7 @@ module.exports = {
             }
         );
 
-        var user = sequelize.define('user', {
-            uuid: {
-                type: Sequelize.STRING
-            },
-            email: {
-                type: Sequelize.STRING
-            },
-            lastLogin: {
-                type: Sequelize.STRING
-            },
-            password: {
-                type: Sequelize.STRING
-            },
-            username: {
-                type: Sequelize.STRING
-            },
-            sex: {
-                type: Sequelize.STRING
-            },
-            description: {
-                type: Sequelize.STRING
-            },
-            sign: {
-                type: Sequelize.STRING
-            },
-            nickname: {
-                type: Sequelize.STRING
-            }
-        });
+        var user = sequelize.define('user', schema.user(Sequelize));
         return user;
     }
 };
