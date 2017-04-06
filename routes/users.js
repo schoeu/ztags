@@ -2,7 +2,6 @@ var express = require('express');
 var uuid = require('uuid/v4');
 var router = express.Router();
 var db = require('../src/db');
-var crypto = require('crypto');
 var utils = require('../utils/utils');
 var userConn = db.getDb();
 var config = require('../src/config').path('../config/config_app.json');
@@ -25,7 +24,7 @@ router.post('/password', function (req, res, next) {
     var username = req.session.username;
     var opsw = req.body.opsw;
     var password = req.body.password;
-    var hashNewPsw = crypto.createHash('sha1').update(password).digest('hex');
+    var hashNewPsw = utils.getHash(password);
     if (opsw && username && password) {
         userConn.findOne({
             attributes: ['password'],
@@ -34,7 +33,7 @@ router.post('/password', function (req, res, next) {
             }
         }).then(function (result) {
             var p = result.get('password');
-            var hashPsw = crypto.createHash('sha1').update(opsw).digest('hex');
+            var hashPsw = utils.getHash(opsw);
             if (p === hashPsw) {
                 return userConn.update({
                     password: hashNewPsw
@@ -144,7 +143,7 @@ router.get('/signup', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    var hashPsw = crypto.createHash('sha1').update(password).digest('hex');
+    var hashPsw = utils.getHash(password);
     if (username && password) {
         req.session.username = username;
         userConn.findOne({
@@ -197,7 +196,7 @@ router.post('/login', function (req, res, next) {
             }
         }).then(function (user) {
             var psw = user.get('password');
-            var hashPsw = crypto.createHash('sha1').update(password).digest('hex');
+            var hashPsw = utils.getHash(password);
             if (psw === hashPsw) {
                 req.session.username = userName;
                 userConn.update({

@@ -4,6 +4,8 @@
  * 公共方法
  * */
 
+var crypto = require('crypto');
+
 module.exports = {
     dateFormat: function (date, fmt) {
         var o = {
@@ -25,5 +27,11 @@ module.exports = {
             }
         }
         return fmt;
+    },
+    getHash: function (str) {
+        if (typeof str === 'string') {
+            return crypto.createHash('sha1').update(str).digest('hex');
+        }
+        return '';
     }
 };
