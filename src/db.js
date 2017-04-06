@@ -8,7 +8,7 @@ var crtPath = path.join(__dirname, '..');
 var dbConf = require(crtPath + '/src/config').path(crtPath + '/config/config_db.json');
 
 module.exports = {
-    getDb: function () {
+    getDb: function (type) {
         var sequelize = new Sequelize(
             dbConf.getItem('name'),
             dbConf.getItem('username'),
@@ -20,7 +20,6 @@ module.exports = {
             }
         );
 
-        var user = sequelize.define('user', schema.user(Sequelize));
-        return user;
+        return sequelize.define(type, schema[type](Sequelize));
     }
 };

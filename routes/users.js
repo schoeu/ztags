@@ -3,7 +3,7 @@ var uuid = require('uuid/v4');
 var router = express.Router();
 var db = require('../src/db');
 var utils = require('../utils/utils');
-var userConn = db.getDb();
+var userConn = db.getDb('user');
 var config = require('../src/config').path('../config/config_app.json');
 
 var defaultInfos = {
@@ -191,6 +191,7 @@ router.post('/login', function (req, res, next) {
     var password = req.body.password;
     if (userName && password) {
         userConn.findOne({
+            attributes: ['password'],
             where: {
                 username: userName
             }
