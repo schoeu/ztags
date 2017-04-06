@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 var appConf = require('./src/config');
 var routes = require('./routes/index');
@@ -10,6 +11,7 @@ var users = require('./routes/users');
 var tags = require('./routes/tags');
 
 var config = appConf.path(path.join(__dirname, './config/config_app.json'));
+var dbConfig = appConf.path(path.join(__dirname, './config/config_redis.json'));
 var app = express();
 
 var theme = config.getItem('theme');
@@ -25,6 +27,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(staticDir, 'static')));
 app.use(session({
+    store: new RedisStore({
+        host: dbConfig.getItem('address'),
+        port: dbConfig.getItem('port'),
+        pass: dbConfig.getItem('password')
+    }),
     secret: config.getItem('secret'),
     resave: false,
     cookie: {maxAge: 3600 * 24 * 30},

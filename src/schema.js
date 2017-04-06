@@ -45,7 +45,7 @@ module.exports = {
             sites: {
                 type: Sequelize.STRING
             },
-            user: {
+            username: {
                 type: Sequelize.STRING
             },
             type: {
