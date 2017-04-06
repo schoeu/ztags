@@ -38,6 +38,40 @@ module.exports = {
         return {
             uuid: {
                 type: Sequelize.STRING
+            },
+            name: {
+                type: Sequelize.STRING
+            },
+            sites: {
+                type: Sequelize.STRING
+            },
+            user: {
+                type: Sequelize.STRING
+            },
+            type: {
+                type: Sequelize.STRING
+            }
+        };
+    },
+    sites: function (Sequelize) {
+        return {
+            uuid: {
+                type: Sequelize.STRING
+            },
+            url: {
+                type: Sequelize.STRING
+            },
+            name: {
+                type: Sequelize.STRING
+            },
+            icon: {
+                type: Sequelize.STRING
+            },
+            tag: {
+                type: Sequelize.STRING
+            },
+            description: {
+                type: Sequelize.STRING
             }
         };
     }
