@@ -1,6 +1,7 @@
 var $tagsForm = $('.bt-tagsf');
 var $tagsText = $('.tagsText');
 var $tagsBtn = $tagsForm.find('.bt-tags-submit');
+var $addItemBtn = $tagsForm.find('.bt-item-add');
 
 $tagsForm.on('submit', function (e) {
     e.preventDefault();
@@ -17,4 +18,8 @@ $tagsForm.on('submit', function (e) {
     }).complete(function () {
         $tagsBtn.attr('disabled', false);
     });
+});
+
+$addItemBtn.on('click', function () {
+
 });

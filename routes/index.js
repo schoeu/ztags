@@ -18,14 +18,16 @@ router.get('/', function(req, res, next) {
             }
         }).then(function (d) {
             if (d.length) {
-                var showTags = d.map(function (it) {
+                var rs = [];
+                for (var i = 0, l = d.length; i < l; i++) {
+                    var it = d[i];
                     if (it.dataValues && it.dataValues.name) {
-                        return it.dataValues.name;
+                        rs.push(it.dataValues.name);
                     }
-                });
+                }
                 res.render('main', Object.assign({}, defaultInfos, {
                     username: username,
-                    showTags: showTags
+                    showTags: rs
                 }));
             }
         }).catch(function (e) {
