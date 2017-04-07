@@ -1,17 +1,20 @@
-$addsForm = $("#addsForm");
-$smtBtn = $addsForm.find('.addsBtn');
-$smtBtn.on("click", function () {
-    $smtBtn.attr("disabled", true);
-    var data = $addsForm.serialize();
+var $tagsForm = $('.bt-tagsf');
+var $tagsText = $('.tagsText');
+var $tagsBtn = $tagsForm.find('.bt-tags-submit');
+
+$tagsForm.on('submit', function (e) {
+    e.preventDefault();
+    $tagsBtn.attr('disabled', true);
+    var data = $tagsForm.serialize();
     $.ajax({
-        url: "/addsite",
-        type: "post",
+        url: '/tags/add',
+        type: 'post',
         data: data
     }).done(function (d) {
-        if (d.errorNo === 0) {
-            $('#addSiteModal').modal('hide');
+        if (d.errno === 0 && d.status === 1) {
+            $tagsText.text('添加出错');
         }
     }).complete(function () {
-        $smtBtn.attr("disabled", false);
+        $tagsBtn.attr('disabled', false);
     });
 });

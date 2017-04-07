@@ -151,7 +151,7 @@ router.post('/signup', function (req, res, next) {
                 username: username
             }
         }).then(function (user) {
-            if (user && user.$options.raw) {
+            if (user.length) {
                 res.returnJson({
                     status: 1
                 });

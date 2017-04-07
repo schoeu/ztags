@@ -7,7 +7,7 @@ var db = require('../src/db');
 var tagsConn = db.getDb('tags');
 var utils = require('../utils/utils');
 
-router.get('/list', function(req, res, next) {
+router.get('/list', function (req, res, next) {
     var username = req.session.username;
     tagsConn.findAll({
         where: {
@@ -23,17 +23,18 @@ router.get('/list', function(req, res, next) {
 
 });
 
-router.post('/add', function(req, res, next) {
+router.post('/add', function (req, res, next) {
     var username = req.session.username;
     var tagname = req.body.tagname;
     if (username && tagname) {
-        tagsConn.findOne({
+        tagsConn.findAll({
             attributes: ['name'],
             where: {
-                username: username
+                username: username,
+                name: tagname
             }
         }).then(function (user) {
-            if (user && user.$options.raw) {
+            if (user.length) {
                 res.returnJson({
                     status: 1
                 });
