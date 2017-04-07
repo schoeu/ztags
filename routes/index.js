@@ -31,6 +31,11 @@ router.get('/', function(req, res, next) {
         }).catch(function (e) {
         });
     }
+    else {
+        res.render('main', Object.assign({}, defaultInfos, {
+            username: username
+        }));
+    }
 
 });
 

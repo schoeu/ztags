@@ -16,9 +16,10 @@ block gird_content
                 a.bt-tags-libtn(href="/") 取消
     .bt-container.bt-nav.bt-font-14
         .bt-clear
-            each tagItem in showTags
-                .bt-nav-item
-                    | #{tagItem}
+            if showTags && showTags.length > 0
+                each tagItem in showTags
+                    .bt-nav-item
+                        | #{tagItem}
             else
                 p 暂无标签信息
         .bt-recom-list
