@@ -1,7 +1,7 @@
 # ztags
 > ztag website.
 
-[![Linux Build](https://img.shields.io/travis/schoeu/tags/master.svg?label=linux)](https://travis-ci.org/schoeu/tags)
+[![Linux Build](https://travis-ci.org/schoeu/ztags.svg?branch=master)](https://travis-ci.org/schoeu/tags)
 
 ## Install
 ```
