@@ -3,6 +3,17 @@ extends grid
 block cstyle
     link(type='text/css', rel='stylesheet', href='/css/main.css')
 block gird_content
+    if username
+        .bt-dialog
+            form.bt-tags(action="/tags/add" method="post")
+                .bt-infos-nn
+                    label(for='tagname') 类目名称
+                    input#tagname.bt-font-14(type='text', name='tagname', placeholder='请输入类目名称')
+                .tagsText
+                .bt-login-libtn.bt-font-14.bt-text-center
+                    input.bt-btn.bt-tags-submit(type='submit', value='确定')
+                .bt-tags-libtn.bt-font-14.bt-text-center
+                a.bt-tags-libtn(href="/") 取消
     .bt-container.bt-nav.bt-font-14
         .bt-clear
             .bt-nav-item

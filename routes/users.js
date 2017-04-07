@@ -1,5 +1,4 @@
 var express = require('express');
-var uuid = require('uuid/v4');
 var router = express.Router();
 var db = require('../src/db');
 var utils = require('../utils/utils');
@@ -161,7 +160,7 @@ router.post('/signup', function (req, res, next) {
                 return userConn.create({
                     username: username,
                     password: hashPsw,
-                    uuid: uuid()
+                    uuid: utils.getUUID()
                 });
             }
         }).then(function (u) {

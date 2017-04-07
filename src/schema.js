@@ -42,13 +42,7 @@ module.exports = {
             name: {
                 type: Sequelize.STRING
             },
-            sites: {
-                type: Sequelize.STRING
-            },
             username: {
-                type: Sequelize.STRING
-            },
-            type: {
                 type: Sequelize.STRING
             }
         };

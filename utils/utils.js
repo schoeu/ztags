@@ -5,6 +5,7 @@
  * */
 
 var crypto = require('crypto');
+var uuid = require('uuid/v4');
 
 module.exports = {
     dateFormat: function (date, fmt) {
@@ -33,5 +34,8 @@ module.exports = {
             return crypto.createHash('sha1').update(str).digest('hex');
         }
         return '';
+    },
+    getUUID: function () {
+        return uuid();
     }
 };
