@@ -1,6 +1,8 @@
 # ztags
 > ztag website.
 
+[![Linux Build](https://img.shields.io/travis/schoeu/tags/master.svg?label=linux)](https://travis-ci.org/schoeu/tags)
+
 ## Install
 ```
 npm install
