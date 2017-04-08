@@ -14,7 +14,7 @@ router.get('/list', function (req, res, next) {
             username: username
         }
     }).then(function (result) {
-        res.render('main', {title: 'Ztags'});
+        res.render('main');
     }).catch(function (err) {
         res.returnJson({
             status: 1

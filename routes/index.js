@@ -3,10 +3,6 @@ var router = express.Router();
 var db = require('../src/db');
 var tagsConn = db.getDb('tags');
 
-var defaultInfos = {
-    title: 'Ztags'
-};
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
     var username = req.session.username;
@@ -28,18 +24,18 @@ router.get('/', function(req, res, next) {
                         });
                     }
                 }
-                res.render('main', Object.assign({}, defaultInfos, {
+                res.render('main', {
                     username: username,
                     showTags: rs
-                }));
+                });
             }
         }).catch(function (e) {
         });
     }
     else {
-        res.render('main', Object.assign({}, defaultInfos, {
+        res.render('main', {
             username: username
-        }));
+        });
     }
 
 });

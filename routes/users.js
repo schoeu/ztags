@@ -5,18 +5,14 @@ var utils = require('../utils/utils');
 var userConn = db.getDb('user');
 var config = require('../src/config').path('../config/config_app.json');
 
-var defaultInfos = {
-    title: config.getItem('title')
-};
-
 /**
  * 修改密码
  * */
 router.get('/password', function (req, res, next) {
     var username = req.session.username;
-    res.render('password', Object.assign({}, {
+    res.render('password', {
         username: username
-    }, defaultInfos));
+    });
 });
 
 router.post('/password', function (req, res, next) {
@@ -80,14 +76,14 @@ router.get('/infos', function (req, res, next) {
             var email = user.get('email');
             var description = user.get('description');
             var sign = user.get('sign');
-            res.render('infos', Object.assign({}, {
+            res.render('infos', {
                 username: username,
                 nickname: nickname,
                 sex: sex,
                 email: email,
                 description: description,
                 sign: sign
-            }, defaultInfos));
+            });
         }).catch(function (e) {
             console.log(e);
         });
@@ -129,14 +125,14 @@ router.post('/infos', function (req, res, next) {
  * */
 router.get('/signout', function (req, res, next) {
     req.session.username = '';
-    res.render('main', defaultInfos);
+    res.render('main');
 });
 
 /**
  * 注册
  * */
 router.get('/signup', function (req, res, next) {
-    res.render('signup', defaultInfos);
+    res.render('signup');
 });
 
 router.post('/signup', function (req, res, next) {
@@ -182,7 +178,7 @@ router.post('/signup', function (req, res, next) {
  * 登录
  * */
 router.get('/login', function (req, res, next) {
-    res.render('login', defaultInfos);
+    res.render('login');
 });
 
 router.post('/login', function (req, res, next) {

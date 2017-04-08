@@ -39,6 +39,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.locals.title = config.getItem('title');
 app.use(function (req, res, next) {
     if (!res.returnJson) {
         res.returnJson = function (val) {
