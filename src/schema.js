@@ -6,7 +6,7 @@ module.exports = {
     user: function (Sequelize) {
         return {
             uuid: {
-                type: Sequelize.STRING
+                type: Sequelize.UUID
             },
             email: {
                 type: Sequelize.STRING
@@ -37,7 +37,7 @@ module.exports = {
     tags: function (Sequelize) {
         return {
             uuid: {
-                type: Sequelize.STRING
+                type: Sequelize.UUID
             },
             name: {
                 type: Sequelize.STRING
@@ -50,7 +50,7 @@ module.exports = {
     sites: function (Sequelize) {
         return {
             uuid: {
-                type: Sequelize.STRING
+                type: Sequelize.UUID
             },
             url: {
                 type: Sequelize.STRING
