@@ -4,18 +4,22 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../src/db');
-var sitessConn = db.getDb('sites');
+var sitesConn = db.getDb('sites');
 var utils = require('../utils/utils');
 
 router.post('/add', function (req, res, next) {
     var username = req.session.username;
-    var tagname = req.body.tagname;
-    if (username && tagname) {
-        sitessConn.findAll({
+    var sitename = req.body.sitename;
+    var sitetags = req.body.sitetags;
+    var siteurl = req.body.siteurl;
+    var sitedesc = req.body.sitedesc;
+    if (username && sitename && sitetags && siteurl) {
+        sitesConn.findAll({
             attributes: ['name'],
             where: {
                 username: username,
-                name: tagname
+                name: sitename,
+                tag: sitetags
             }
         }).then(function (user) {
             if (user.length) {
@@ -24,10 +28,13 @@ router.post('/add', function (req, res, next) {
                 });
             }
             else {
-                return tagsConn.create({
+                return sitesConn.create({
                     username: username,
-                    name: tagname,
-                    uuid: utils.getUUID()
+                    name: sitename,
+                    uuid: utils.getUUID(),
+                    tag: sitetags,
+                    url: siteurl,
+                    description: sitedesc
                 });
             }
         }).then(function (u) {

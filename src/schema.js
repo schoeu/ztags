@@ -58,6 +58,9 @@ module.exports = {
             name: {
                 type: Sequelize.STRING
             },
+            username: {
+                type: Sequelize.STRING
+            },
             icon: {
                 type: Sequelize.STRING
             },

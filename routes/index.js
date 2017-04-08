@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     var username = req.session.username;
     if (username) {
         tagsConn.findAll({
-            attributes: ['name'],
+            attributes: ['name', 'uuid'],
             where: {
                 username: username
             }
@@ -22,7 +22,10 @@ router.get('/', function(req, res, next) {
                 for (var i = 0, l = d.length; i < l; i++) {
                     var it = d[i];
                     if (it.dataValues && it.dataValues.name) {
-                        rs.push(it.dataValues.name);
+                        rs.push({
+                            name: it.dataValues.name,
+                            value: it.dataValues.uuid
+                        });
                     }
                 }
                 res.render('main', Object.assign({}, defaultInfos, {
