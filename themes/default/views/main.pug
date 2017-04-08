@@ -22,6 +22,28 @@ block gird_content
                         | #{tagItem}
             else
                 p 暂无标签信息
+
+        .bt-site-dialog.bt-hide
+            form.bt-tagsf(action="/tags/add" method="post")
+                .bt-infos-nn
+                    label(for='sitetags') 类目选择
+                    select(id='sitetags' name='sitetags')
+                        each tagItem in showTags
+                            option(value=tagItem) #{tagItem}
+                .bt-infos-nn
+                    label(for='sitegname') 内容名称
+                    input#sitegname.bt-font-14(type='text', name='sitegname', placeholder='请输入内容名称')
+                .bt-infos-nn
+                    label(for='sitegurl') 内容链接
+                    input#sitegurl.bt-font-14(type='text', name='sitegurl', placeholder='请输入内容链接')
+                .bt-infos-nn
+                    label(for='sitedesc') 内容描述
+                    input#sitedesc.bt-font-14(type='text', name='sitedesc', placeholder='请输入内容描述')
+                .sitesText
+                .bt-login-libtn.bt-font-14.bt-text-center
+                    input.bt-btn.bt-sites-submit(type='submit', value='确定')
+                .bt-tags-libtn.bt-font-14.bt-text-center
+                a.bt-tags-libtn(href="/") 取消
         .bt-recom-list
             .bt-recom-area
                 header.bt-recom-title 设计平台

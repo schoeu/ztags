@@ -9,6 +9,7 @@ var appConf = require('./src/config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var tags = require('./routes/tags');
+var sites = require('./routes/sites');
 
 var config = appConf.path(path.join(__dirname, './config/config_app.json'));
 var dbConfig = appConf.path(path.join(__dirname, './config/config_redis.json'));
@@ -49,10 +50,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-
 app.use('/', routes);
 app.use('/users', users);
 app.use('/tags', tags);
+app.use('/sites', sites);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
