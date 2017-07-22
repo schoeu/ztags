@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../src/db');
+var path = require('path');
 var utils = require('../utils/utils');
 var userConn = db.getDb('user');
+var formidable = require('formidable');
 var config = require('../src/config').path('../config/config_app.json');
 
 /**
@@ -88,6 +90,25 @@ router.get('/infos', function (req, res, next) {
             console.log(e);
         });
     }
+    else {
+        res.redirect('/');
+    }
+});
+
+router.post('/upload', function (req, res) {
+    var form = new formidable.IncomingForm();
+    var scImagesPath;
+    form.encoding = 'utf-8';
+    form.uploadDir = path.join(__dirname, config.get('uploadPath'));
+    form.maxFieldsSize = 2 * 1024 * 1024;
+    form.keepExtensions = true;
+    form.parse(req, function(err, fields, files) {
+        if (err) {
+            throw err;
+        }
+        scImagesPath = path.basename(files.file.path) || '';
+    });
+    res.end();
 });
 
 router.post('/infos', function (req, res, next) {
