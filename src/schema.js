@@ -31,6 +31,9 @@ module.exports = {
             },
             nickname: {
                 type: Sequelize.STRING
+            },
+            avatar: {
+                type: Sequelize.STRING
             }
         };
     },

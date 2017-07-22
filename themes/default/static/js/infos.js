@@ -13,7 +13,10 @@ var uploader = WebUploader.create({
 
     // 选择文件的按钮。可选。
     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-    pick: '.bt-userpic',
+    pick: {
+        id: '.bt-userpic',
+        multiple: false
+    },
 
     // 只允许选择图片文件。
     accept: {
@@ -28,7 +31,7 @@ uploader.on('uploadSuccess', function( file ) {
         $img = $li.find('img');
 
     // $thumb为容器jQuery实例
-    $thumb.append($li);
+    $thumb.empty().append($li);
 
     // 创建缩略图
     // 如果为非图片文件，可以不用调用此方法。

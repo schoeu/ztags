@@ -34,4 +34,11 @@
 .bt-userthum img{
     border-radius: 4px;
 }
+.bt-avatar{
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 /** grid-header end **/

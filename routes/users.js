@@ -5,8 +5,9 @@ var path = require('path');
 var utils = require('../utils/utils');
 var userConn = db.getDb('user');
 var formidable = require('formidable');
+var fs = require('fs-extra')
 var config = require('../src/config').path('../config/config_app.json');
-
+var userPicPath = '';
 /**
  * 修改密码
  * */
@@ -68,7 +69,7 @@ router.get('/infos', function (req, res, next) {
     var username = req.session.username;
     if (username) {
         userConn.findOne({
-            attributes: ['nickname', 'sex', 'email', 'description', 'sign', 'sex'],
+            attributes: ['nickname', 'sex', 'email', 'description', 'sign', 'sex', 'avatar'],
             where: {
                 username: username
             }
@@ -78,13 +79,15 @@ router.get('/infos', function (req, res, next) {
             var email = user.get('email');
             var description = user.get('description');
             var sign = user.get('sign');
+            var avatar = user.get('avatar');
             res.render('infos', {
                 username: username,
                 nickname: nickname,
                 sex: sex,
                 email: email,
                 description: description,
-                sign: sign
+                sign: sign,
+                avatar: avatar
             });
         }).catch(function (e) {
             console.log(e);
@@ -97,16 +100,23 @@ router.get('/infos', function (req, res, next) {
 
 router.post('/upload', function (req, res) {
     var form = new formidable.IncomingForm();
-    var scImagesPath;
+    var uploadDir = path.join(__dirname, '..', config.getItem('uploadPath')) || '';
     form.encoding = 'utf-8';
-    form.uploadDir = path.join(__dirname, config.get('uploadPath'));
+    form.uploadDir = uploadDir;
+    fs.ensureDirSync(uploadDir);
     form.maxFieldsSize = 2 * 1024 * 1024;
     form.keepExtensions = true;
     form.parse(req, function(err, fields, files) {
         if (err) {
-            throw err;
+            console.log('upload error');
         }
-        scImagesPath = path.basename(files.file.path) || '';
+        if (files.file.path) {
+            userPicPath = path.sep + path.join(path.basename(config.getItem('uploadPath')), path.basename(files.file.path));
+        }
+        else {
+            userPicPath = '';
+        }
+
     });
     res.end();
 });
@@ -124,7 +134,8 @@ router.post('/infos', function (req, res, next) {
             sex: sex,
             email: email,
             description: description,
-            sign: sign
+            sign: sign,
+            avatar: userPicPath
         }, {
             where: {
                 username: username
