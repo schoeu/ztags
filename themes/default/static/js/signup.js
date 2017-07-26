@@ -22,7 +22,7 @@ $signupForm.on('submit', function (e) {
                 $signUpText.text('该用户已注册');
             }
             else if (d.status === 0) {
-                location.href = '/';
+                location.href = '/users/login';
             }
         }
     }).complete(function () {

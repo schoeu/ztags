@@ -170,16 +170,14 @@ router.get('/signup', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
-    var hashPsw = utils.getHash(password);
     if (username && password) {
-        req.session.username = username;
         userConn.findOne({
             attributes: ['password'],
             where: {
                 username: username
             }
         }).then(function (user) {
-            if (user.length) {
+            if (user && user.length) {
                 res.returnJson({
                     status: 1
                 });
@@ -187,22 +185,20 @@ router.post('/signup', function (req, res, next) {
             else {
                 return userConn.create({
                     username: username,
-                    password: hashPsw,
+                    password: utils.getHash(password),
                     uuid: utils.getUUID()
                 });
             }
         }).then(function (u) {
-            if (u) {
-                res.returnJson({
-                    status: 0
-                });
-            }
+            res.returnJson({
+                status: u ? 0 : 1
+            });
         }).catch(function (e) {
             res.returnJson({
                 status: 1
             });
+            throw e;
         });
-
     }
 });
 
@@ -244,6 +240,7 @@ router.post('/login', function (req, res, next) {
                 });
             }
         }).catch(function (e) {
+            throw e;
         });
     }
 });

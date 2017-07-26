@@ -20,7 +20,7 @@ block grid_content
                 each tagItem in showTags
                     .bt-nav-item(data-id=tagItem.value) #{tagItem.name}
             else
-                p 暂无标签信息
+                p 添加自定义类目
 
         .bt-site-dialog.bt-hide
             form.bt-sitesf(action="/sites/add" method="post")
