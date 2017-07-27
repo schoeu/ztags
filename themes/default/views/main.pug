@@ -2,7 +2,7 @@ extends grid
 
 block cstyle
     link(type='text/css', rel='stylesheet', href='/css/main.css')
-block gird_content
+block grid_content
     if username
         .bt-dialog
             form.bt-tagsf(action="/tags/add" method="post")
@@ -20,7 +20,7 @@ block gird_content
                 each tagItem in showTags
                     .bt-nav-item(data-id=tagItem.value) #{tagItem.name}
             else
-                p 暂无标签信息
+                p 添加自定义类目
 
         .bt-site-dialog.bt-hide
             form.bt-sitesf(action="/sites/add" method="post")

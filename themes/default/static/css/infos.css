@@ -1,0 +1,44 @@
+.bt_userpic{
+    position: relative;
+}
+.bt-psw-form{
+    margin-top: 15px;
+}
+/** grid-header start **/
+.bt-header-left,.bt-header-right{
+    width: 50%;
+    display: inline-block;
+}
+.bt-header-left{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 12px 28px 9px 12px;
+}
+.bt-userpic input{
+    width: 0!important;
+    height: 0!important;
+}
+.webuploader-pick{
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0,0,0,.25);
+    border-radius: 5px;
+}
+.bt-userthum{
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+.bt-userthum img{
+    border-radius: 4px;
+}
+.bt-avatar{
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/** grid-header end **/
