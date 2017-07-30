@@ -13,7 +13,6 @@ var theme = path.join('./themes', config.getItem('theme'), 'static');
 var themePath = path.join(theme, 'dict');
 
 var srcOpts = {
-    base: __dirname,
     buffer: true
 };
 
